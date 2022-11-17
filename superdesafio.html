@@ -18,6 +18,7 @@
     Cavalo 02 :<input type="text" id="in_nome2"> <br>
     Cavalo 03 :<input type="text" id="in_nome3"> <br><br>
     <button onclick="corrida()">Iniciar Corrida</button>
+    <div id="div_info"></div>
 </body>
 </html>
 <script>
@@ -49,9 +50,9 @@
                 temposvolta3.push(tempcav03)
                 id++
                 var volta=`${id}ª Volta `
-                tempoacum01=tempcav01
-                tempoacum02=tempcav02
-                tempoacum03=tempcav03
+                tempoacum01=Number(tempcav01)
+                tempoacum02=Number(tempcav02)
+                tempoacum03=Number(tempcav03)
                 turfe.push({
                 volta:volta,
                 cavalo1:{nome:nome1,tempo:tempcav01,tempoacum:tempoacum01},
@@ -65,9 +66,9 @@
                 temposvolta3.push(tempcav03)
                 id++
                 var volta=`${id}ª Volta `
-                tempoacum01+=tempcav01
-                tempoacum02+=tempcav02
-                tempoacum03+=tempcav03
+                tempoacum01+=Number(tempcav01)
+                tempoacum02+=Number(tempcav02)
+                tempoacum03+=Number(tempcav03)
                 turfe.push({
                 volta:volta,
                 cavalo1:{nome:nome1,tempo:tempcav01,tempoacum:tempoacum01},
@@ -75,19 +76,28 @@
                 cavalo3:{nome:nome3,tempo:tempcav03,tempoacum:tempoacum03},
             })  
             }
-            var tempoacum=[{nome:nome1,tempo:tempoacum01},{nome:nome2,tempo:tempoacum02},{nome:nome3,tempo:tempoacum03}]
-            for (let index = 0; index < tempoacum.length; index++) {
-                
-                
-            }
-            var primeiro=Math.min.apply(null,tempoacum)
         }
-        div_info.innerHTML=`Em 1º Lugar – CavaloXX 
+        var tempoacum=[{nome:nome1,tempo:tempoacum01},{nome:nome2,tempo:tempoacum02},{nome:nome3,tempo:tempoacum03}]
+        var ordemvenc=[]
+        var org=[]
+        var primeiro
+        var segundo
+        var terceiro
+        for (let index = 0; index < tempoacum.length; index++) {
+            ordemvenc.push(Number(tempoacum[index].tempo))
+            org.push(Number(tempoacum[index].tempo))
+        }
+        org.sort()
+        primeiro=tempoacum[ordemvenc.indexOf(org[0])].nome
+        segundo=tempoacum[ordemvenc.indexOf(org[1])].nome
+        terceiro=tempoacum[ordemvenc.indexOf(org[2])].nome
 
-                            Em 2º Lugar – CavaloXX 
-
-                            Em 3º Lugar – CavaloXX `
-
+        div_info.innerHTML=`Em 1º Lugar – ${primeiro} <br>
+    
+                            Em 2º Lugar – ${segundo} <br>
+    
+                            Em 3º Lugar – ${terceiro} <br>`
+        
     }
 </script>
 
