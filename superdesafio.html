@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Desafio</title>
+</head>
+<body>
+    <h1>Turfes</h1>    
+    Determine quanto tempo irá durar uma volta: <br><br>
+    Tempo mínimo :<input type="text" id="in_tempmin" placeholder="Min"> Tempo máximo :<input type="text" id="in_tempmax" placeholder="Máx">
+    <br><br>
+    Quantas voltas serão ao total? <br>
+    <input type="text" id="in_voltas"> <br><br>
+    Defina os nomes dos cavalos que irão compor sua Turfe! <br><br>
+    Cavalo 01 :<input type="text" id="in_nome1"> <br>
+    Cavalo 02 :<input type="text" id="in_nome2"> <br>
+    Cavalo 03 :<input type="text" id="in_nome3"> <br><br>
+    <button onclick="corrida()">Iniciar Corrida</button>
+</body>
+</html>
+<script>
+    var turfe=[]
+    var tempcav01=0
+    var tempcav02=0
+    var tempcav03=0
+    var id=0
+    function largada(){
+        var dif=(Number(in_tempmin.value)-Number(in_tempmax.value))
+        var min=(Number(in_tempmin.value))
+        tempcav01=((Math.random()*dif)+min).toFixed(2)
+        tempcav02=((Math.random()*dif)+min).toFixed(2)
+        tempcav03=((Math.random()*dif)+min).toFixed(2)
+    }
+    function corrida(){
+        var nome1=in_nome1.value
+        var nome2=in_nome2.value
+        var nome3=in_nome3.value
+        var voltas=Number(in_voltas.value)
+        for (let index = 0; index < voltas; index++) {
+            if(index==0){
+                largada()
+                var temposvolta1=[]
+                temposvolta1.push(tempcav01)
+                var temposvolta2=[]
+                temposvolta2.push(tempcav02)
+                var temposvolta3=[]
+                temposvolta3.push(tempcav03)
+                id++
+                var volta=`${id}ª Volta `
+                tempoacum01=tempcav01
+                tempoacum02=tempcav02
+                tempoacum03=tempcav03
+                turfe.push({
+                volta:volta,
+                cavalo1:{nome:nome1,tempo:tempcav01,tempoacum:tempoacum01},
+                cavalo2:{nome:nome2,tempo:tempcav02,tempoacum:tempoacum02},
+                cavalo3:{nome:nome3,tempo:tempcav03,tempoacum:tempoacum03},
+            })
+            }else{
+                largada()
+                temposvolta1.push(tempcav01)
+                temposvolta2.push(tempcav02)
+                temposvolta3.push(tempcav03)
+                id++
+                var volta=`${id}ª Volta `
+                tempoacum01+=tempcav01
+                tempoacum02+=tempcav02
+                tempoacum03+=tempcav03
+                turfe.push({
+                volta:volta,
+                cavalo1:{nome:nome1,tempo:tempcav01,tempoacum:tempoacum01},
+                cavalo2:{nome:nome2,tempo:tempcav02,tempoacum:tempoacum02},
+                cavalo3:{nome:nome3,tempo:tempcav03,tempoacum:tempoacum03},
+            })  
+            }
+            var tempoacum=[{nome:nome1,tempo:tempoacum01},{nome:nome2,tempo:tempoacum02},{nome:nome3,tempo:tempoacum03}]
+            for (let index = 0; index < tempoacum.length; index++) {
+                
+                
+            }
+            var primeiro=Math.min.apply(null,tempoacum)
+        }
+        div_info.innerHTML=`Em 1º Lugar – CavaloXX 
+
+                            Em 2º Lugar – CavaloXX 
+
+                            Em 3º Lugar – CavaloXX `
+
+    }
+</script>
+
+<!-- {
+                volta:"volta",
+                cavalo1:{nome:"nome1",tempo:"tempcav01",tempoacum:"tempoacum01"},
+                cavalo2:{nome:"nome2",tempo:"tempcav02",tempoacum:"tempoacum02"},
+                cavalo3:{nome:"nome3",tempo:"tempcav03",tempoacum:"tempoacum03"},
+            } -->
